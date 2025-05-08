@@ -1,4 +1,3 @@
-/* Asegura que todo el HTML y body usen 100% del ancho y sin márgenes */
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -7,3 +6,11 @@ html, body, #root {
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
+/* Añade esto para asegurar el comportamiento del grid */
+.MuiGrid-root {
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  
+}
+

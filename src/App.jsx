@@ -16,13 +16,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import './App.css'
 
 
-
-/* const theme = createTheme({
-  palette: {
-    primary: { main: "#4caf50" },
-    secondary: { main: "#ff9800" },
-  },
-}); */
 function App() {
   const [mode, setMode] = useState("light");
 

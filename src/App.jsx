@@ -77,7 +77,7 @@ function App() {
                 </Routes>
               </Container>
             </Box>
-            <Footer />
+            <Footer mode={mode} toggleTheme={toggleTheme} />
           </Router>
         </ChatProvider>
       </ThemeProvider>

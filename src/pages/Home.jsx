@@ -1,0 +1,159 @@
+import { Container, Typography, Button, Box, Grid, Paper, Avatar, useTheme, styled } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import EmergencyMode from "../components/EmergencyMode";
+import { PsychologyAlt, Analytics, Book, Spa, Emergency } from '@mui/icons-material';
+import { keyframes } from '@emotion/react';
+
+const floating = keyframes`
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+`;
+
+const FeatureCard = styled(Paper)(({ theme }) => ({
+  padding: '2rem',
+  borderRadius: '20px',
+  transition: '0.3s',
+  '&:hover': {
+    transform: 'translateY(-10px)',
+    boxShadow: theme.shadows[8]
+  },
+  cursor: 'pointer'
+}));
+
+const Home = () => {
+  const navigate = useNavigate();
+  const [openEmergency, setOpenEmergency] = useState(false);
+  const theme = useTheme();
+
+  return (
+    <Box sx={{
+      minHeight: '100vh',
+      background: `linear-gradient(160deg, ${theme.palette.primary.light} 0%, ${theme.palette.background.default} 100%)`,
+      padding: { xs: '2rem 1rem', md: '4rem 2rem' }
+    }}>
+      <Container maxWidth="lg">
+        {/* Hero Section */}
+        <Box sx={{
+          textAlign: 'center',
+          mb: 8,
+          position: 'relative'
+        }}>
+          <Avatar sx={{
+            width: 120,
+            height: 120,
+            m: 'auto',
+            mb: 4,
+            bgcolor: 'primary.main',
+            animation: `${floating} 6s ease-in-out infinite`
+          }}>
+            <PsychologyAlt sx={{ fontSize: 60 }} />
+          </Avatar>
+          
+          <Typography variant="h2" gutterBottom sx={{
+            fontWeight: 900,
+            background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            mb: 3
+          }}>
+            Tu Espacio Emocional
+          </Typography>
+          
+          <Typography variant="h5" sx={{
+            color: 'text.secondary',
+            maxWidth: '800px',
+            mx: 'auto',
+            mb: 4
+          }}>
+            Un ecosistema inteligente para tu bienestar emocional, combinando IA avanzada con herramientas terapéuticas interactivas.
+          </Typography>
+
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => navigate('/chat')}
+            startIcon={<PsychologyAlt />}
+            sx={{
+              px: 6,
+              py: 2,
+              borderRadius: '50px',
+              fontSize: '1.1rem',
+              boxShadow: 4,
+              '&:hover': {
+                transform: 'scale(1.05)'
+              }
+            }}
+          >
+            Comenzar Sesión
+          </Button>
+        </Box>
+
+        {/* Features Grid */}
+        <Grid container spacing={4} justifyContent="center" sx={{ mb: 8 }}>
+          <Grid item xs={12} md={6} lg={4}>
+            <FeatureCard onClick={() => navigate('/grafico')}>
+              <Analytics color="primary" sx={{ fontSize: 50, mb: 2 }} />
+              <Typography variant="h5" gutterBottom>Análisis Emocional</Typography>
+              <Typography color="text.secondary">
+                Visualiza tu progresión emocional con gráficos interactivos y análisis predictivo.
+              </Typography>
+            </FeatureCard>
+          </Grid>
+          
+          <Grid item xs={12} md={6} lg={4}>
+            <FeatureCard onClick={() => navigate('/diario')}>
+              <Book color="primary" sx={{ fontSize: 50, mb: 2 }} />
+              <Typography variant="h5" gutterBottom>Diario Inteligente</Typography>
+              <Typography color="text.secondary">
+                Tu diario con análisis automático de sentimientos y sugerencias personalizadas.
+              </Typography>
+            </FeatureCard>
+          </Grid>
+
+          <Grid item xs={12} md={6} lg={4}>
+            <FeatureCard onClick={() => navigate('/relajacion')}>
+              <Spa color="primary" sx={{ fontSize: 50, mb: 2 }} />
+              <Typography variant="h5" gutterBottom>Espacio Zen</Typography>
+              <Typography color="text.secondary">
+                Técnicas de realidad aumentada para meditación y control de ansiedad.
+              </Typography>
+            </FeatureCard>
+          </Grid>
+        </Grid>
+
+        {/* Emergency Section */}
+        <Box sx={{
+          textAlign: 'center',
+          position: 'sticky',
+          bottom: '2rem',
+          zIndex: 1000
+        }}>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => setOpenEmergency(true)}
+            startIcon={<Emergency />}
+            sx={{
+              px: 4,
+              py: 1.5,
+              borderRadius: '15px',
+              fontSize: '1rem',
+              boxShadow: 6,
+              '&:hover': {
+                animation: 'pulse 1.5s infinite'
+              }
+            }}
+          >
+            Modo Crisis
+          </Button>
+        </Box>
+
+        <EmergencyMode open={openEmergency} onClose={() => setOpenEmergency(false)} />
+      </Container>
+    </Box>
+  );
+};
+
+export default Home;

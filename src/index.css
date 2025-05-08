@@ -1,0 +1,9 @@
+/* Asegura que todo el HTML y body usen 100% del ancho y sin márgenes */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
